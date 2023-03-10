@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "24b01aa3-70f3-48d9-9101-247e1a86454c"
+      }
+    },
+    "owner": "ethery"
   }
 }
