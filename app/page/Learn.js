@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Learn({ index, data, setShowLearn }) {
-  const sentenseAmount = data.length + 1;
+  const sentenseAmount = data.length;
   const [sentenseNum, setSentenseNum] = useState(0);
   const [currentData, setCurrentData] = useState(data[sentenseNum]);
   const [isKorean, setIsKorean] = useState(false);
@@ -18,7 +18,7 @@ export default function Learn({ index, data, setShowLearn }) {
       setIsKorean(false)
     } else {
       setSentenseNum(currentIndex);
-      setCurrentData(data[sentenseNum]);
+      setCurrentData(data[currentIndex]);
       setIsKorean(false)
     }
   };
@@ -39,13 +39,13 @@ export default function Learn({ index, data, setShowLearn }) {
         <View style={styles.learnBox}>
           <TouchableOpacity onPress={() => switchKorean()}>
             {isKorean ? (
-              <Text>{currentData.korean}</Text>
+              <Text style={{fontSize: 30}}>{currentData?.korean}</Text>
             ) : (
-              <Text>{currentData.word}</Text>
+              <Text style={{fontSize: 30}}>{currentData?.word}</Text>
             )}
           </TouchableOpacity>
 
-          <Text>{currentData.sentense}</Text>
+          <Text style={{fontSize: 20}}>{currentData?.sentense}</Text>
           <TouchableOpacity onPress={() => showDataLogic(sentenseNum)}>
             <MaterialCommunityIcons
               name="arrow-right-circle-outline"
@@ -89,6 +89,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 20,
     backgroundColor: "#afb588",
+  },
+  contentsFont: {
+    fontSize: 20
   },
   bottom: {
     width: 650,
