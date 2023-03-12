@@ -1,12 +1,13 @@
-var http = require('http'); 
+// import { pool } from "./dataBaseConnector";
 
-var server = http.createServer(function(request,response){ 
+const express = require('express')
+const app = express()
+const port = 8001
 
-    response.writeHead(200,{'Content-Type':'text/html'});
-    response.end('Hello node.js!!');
-
-});
-
-server.listen(8080, function(){ 
-    console.log('Server is running...');
-});
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+  
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
