@@ -9,11 +9,13 @@ export default function ManageContents() {
   return (
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
-      <ScrollView style={styles.mainContents}>
-        <Pressable style={styles.roundBtn}>
-          <Text style={styles.btnText}>1</Text>
-        </Pressable>
-      </ScrollView>
+      <View style={styles.mainContents}>
+        {mockData.map((item, index) => (
+          <Pressable key={index} style={styles.roundBtn}>
+            <Text style={styles.btnText}>{index + 1}</Text>
+          </Pressable>
+        ))}
+      </View>
     </View>
   );
 }
@@ -30,7 +32,10 @@ const styles = StyleSheet.create({
     resizeMode: "contain", // 이미지를 화면에 맞게 조정
   },
   mainContents: {
-        paddingTop: 60
+    paddingTop: 60,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
   },
   roundBtn: {
     width: 60,
@@ -39,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e07e41",
     justifyContent: "center", // 수직 방향 가운데 정렬
     alignItems: "center", // 수평 방향 가운데 정렬
+    margin: 11,
   },
   btnText: {
     color: "#fff",
