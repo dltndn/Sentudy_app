@@ -57,7 +57,7 @@ export default function Learn({ index, data }) {
       </View>
 
       <View style={styles.bottom}>
-        <BottomBar roundIndex={index} />
+        <BottomBar roundIndex={index} isLearn={true}/>
       </View>
     </View>
   );
@@ -86,7 +86,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    borderRadius: 20,
+    backgroundColor: "#afb588",
   },
   bottom: {
     width: 650,

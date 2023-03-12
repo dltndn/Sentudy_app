@@ -1,20 +1,44 @@
-import { StyleSheet, View, Pressable, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
-export default function BottomBar({ roundIndex }) {
+export default function BottomBar({ roundIndex, isLearn }) {
   return (
-    <View style={styles.bottom}>
-      <LeftBtn />
-      <RightBtn index={roundIndex} />
+    <View>
+      {isLearn ? (
+        <View style={styles.bottom}>
+          <MenuBtn />
+          <RightBtn index={roundIndex} />
+        </View>
+      ) : (
+        <View style={styles.bottom}>
+          <ProfileBtn />
+          <RightBtn index={roundIndex} />
+        </View>
+      )}
     </View>
   );
 }
 
-function LeftBtn() {
+function MenuBtn() {
   return (
-    <Pressable style={styles.menuBtn}>
+    <TouchableOpacity style={styles.menuBtn}>
       <Ionicons name="menu" size={40} color="black" />
-    </Pressable>
+    </TouchableOpacity>
+  );
+}
+
+function ProfileBtn() {
+  return (
+    <TouchableOpacity style={styles.menuBtn}>
+      <Ionicons name="ios-person" size={24} color="black" />
+    </TouchableOpacity>
   );
 }
 
@@ -53,5 +77,5 @@ const styles = StyleSheet.create({
   bottom: {
     flexDirection: "row",
     justifyContent: "space-around",
-  }
+  },
 });

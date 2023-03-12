@@ -20,7 +20,7 @@ export default function ManageContents({dataList}) {
       </View>
 
       <View style={styles.bottom}>
-        <BottomBar roundIndex={"??"} />
+        <BottomBar roundIndex={"??"} isLearn={false}/>
       </View>
     </View>
   );
