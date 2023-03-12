@@ -1,18 +1,15 @@
 import { StyleSheet, View, Pressable, Text, ScrollView } from "react-native";
 import MainLogo from "../components/MainLogo";
-import { roundData } from "../roundMockData";
 import BottomBar from "../components/BottomBar";
 
-// 배열
-const mockData = roundData;
 
-export default function ManageContents() {
+export default function ManageContents({dataList}) {
   return (
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
 
       <View style={styles.mainContents}>
-        {mockData.map((item, index) => (
+        {dataList.map((item, index) => (
           <Pressable key={index} style={roundStyles("#e07e41").roundBtn}>
             <Text style={roundStyles("#e07e41").btnText}>{index + 1}</Text>
           </Pressable>
@@ -50,7 +47,7 @@ const styles = StyleSheet.create({
   },
   bottom: {
     width: 650,
-    backgroundColor: "#121211",
+    backgroundColor: 'transparent'
   },
 });
 
