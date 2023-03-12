@@ -8,17 +8,17 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
-export default function BottomBar({ roundIndex, isLearn }) {
+export default function BottomBar({ roundIndex, isLearn, leftBtnClick }) {
   return (
     <View>
       {isLearn ? (
         <View style={styles.bottom}>
-          <MenuBtn />
+          <MenuBtn onClick={leftBtnClick}/>
           <RightBtn index={roundIndex} />
         </View>
       ) : (
         <View style={styles.bottom}>
-          <ProfileBtn />
+          <ProfileBtn onClick={leftBtnClick}/>
           <RightBtn index={roundIndex} />
         </View>
       )}
@@ -26,17 +26,17 @@ export default function BottomBar({ roundIndex, isLearn }) {
   );
 }
 
-function MenuBtn() {
+function MenuBtn({onClick}) {
   return (
-    <TouchableOpacity style={styles.menuBtn}>
+    <TouchableOpacity onPress={onClick} style={styles.menuBtn}>
       <Ionicons name="menu" size={40} color="black" />
     </TouchableOpacity>
   );
 }
 
-function ProfileBtn() {
+function ProfileBtn({onClick}) {
   return (
-    <TouchableOpacity style={styles.menuBtn}>
+    <TouchableOpacity onPress={onClick} style={styles.menuBtn}>
       <Ionicons name="ios-person" size={24} color="black" />
     </TouchableOpacity>
   );

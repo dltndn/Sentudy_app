@@ -1,18 +1,22 @@
-import { StyleSheet, View, Pressable, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Pressable, Text, TouchableOpacity } from "react-native";
 import MainLogo from "../components/MainLogo";
 import BottomBar from "../components/BottomBar";
 
 
-export default function ManageContents({dataList}) {
+export default function ManageContents({dataList, onRoundPress}) {
+    const handleRoundPress = (index) => {
+        onRoundPress(index);
+      };
+    
   return (
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
 
       <View style={styles.mainContents}>
         {dataList.map((item, index) => (
-          <Pressable key={index} style={roundStyles("#e07e41").roundBtn}>
+          <TouchableOpacity key={index} onPress={() => handleRoundPress(index)} style={roundStyles("#e07e41").roundBtn}>
             <Text style={roundStyles("#e07e41").btnText}>{index + 1}</Text>
-          </Pressable>
+          </TouchableOpacity>
         ))}
         <Pressable style={roundStyles("#d0b5e8").roundBtn}>
             <Text style={roundStyles("#d0b5e8").btnText}>+</Text>
@@ -20,7 +24,7 @@ export default function ManageContents({dataList}) {
       </View>
 
       <View style={styles.bottom}>
-        <BottomBar roundIndex={"??"} isLearn={false}/>
+        <BottomBar roundIndex={"??"} isLearn={false} leftBtnClick={()=>console.log("test")}/>
       </View>
     </View>
   );
@@ -30,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#363530",
   },
   mainLogo: {
     width: 200, // 로고 이미지의 너비

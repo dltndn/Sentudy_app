@@ -10,17 +10,22 @@ import { roundData } from "./roundMockData";
 const mockData = roundData;
 
 export default function App() {
-  const [currentRound, setCurrentRound] = useState();
+  const [currentRound, setCurrentRound] = useState(0);
   const [showLearn, setShowLearn] = useState(true);
+
+  const handleRoundPress = (index) => {
+    setCurrentRound(index);
+    setShowLearn(true)
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
         <StatusBar style="auto" />
         {showLearn ? (
-          <Learn index={1} data={mockData[0]} />
+          <Learn index={currentRound+1} data={mockData[currentRound]} setShowLearn={()=> setShowLearn(false)}/>
         ) : (
-          <ManageContents dataList={mockData} />
+          <ManageContents dataList={mockData} onRoundPress={handleRoundPress}/>
         )}
       </View>
     </SafeAreaView>

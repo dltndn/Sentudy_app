@@ -4,7 +4,7 @@ import BottomBar from "../components/BottomBar";
 import { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function Learn({ index, data }) {
+export default function Learn({ index, data, setShowLearn }) {
   const sentenseAmount = data.length + 1;
   const [sentenseNum, setSentenseNum] = useState(0);
   const [currentData, setCurrentData] = useState(data[sentenseNum]);
@@ -57,7 +57,7 @@ export default function Learn({ index, data }) {
       </View>
 
       <View style={styles.bottom}>
-        <BottomBar roundIndex={index} isLearn={true}/>
+        <BottomBar roundIndex={index} isLearn={true} leftBtnClick={setShowLearn}/>
       </View>
     </View>
   );
