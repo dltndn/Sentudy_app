@@ -1,11 +1,16 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const mariadb = require("mariadb");
-// const env = process.env
+const { Sequelize, DataTypes } = require("sequelize");
+const env = process.env;
 
-// export const pool = mariadb.createPool({
-//   host: env.host,
-//   user: env.user,
-//   port: env.port,
-//   password: env.password
-// });
+
+
+
+exports.dataBase = () => {
+  const dataBase = new Sequelize("sentudy", env.user, env.password, {
+    dialect: "mariadb",
+    host: env.host,
+    port: env.port,
+  });
+  return dataBase
+}
