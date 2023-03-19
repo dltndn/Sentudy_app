@@ -1,31 +1,52 @@
-import { StyleSheet, View, Pressable, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { BlurView } from "expo-blur";
 import MainLogo from "../components/MainLogo";
+import InputSentenseForm from "../components/inputSentenseForm";
 import BottomBar from "../components/BottomBar";
+import { useState } from "react";
 
+export default function ManageContents({ dataList, onRoundPress }) {
+  const [showInputForm, setShowInputForm] = useState(false);
+  const handleRoundPress = (index) => {
+    onRoundPress(index);
+  };
 
-export default function ManageContents({dataList, onRoundPress}) {
-    const handleRoundPress = (index) => {
-        onRoundPress(index);
-      };
-    
   return (
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
 
       <View style={styles.mainContents}>
         {dataList.map((item, index) => (
-          <TouchableOpacity key={index} onPress={() => handleRoundPress(index)} style={roundStyles("#e07e41").roundBtn}>
+          <TouchableOpacity
+            key={index}
+            onPress={() => handleRoundPress(index)}
+            style={roundStyles("#e07e41").roundBtn}
+          >
             <Text style={roundStyles("#e07e41").btnText}>{index + 1}</Text>
           </TouchableOpacity>
         ))}
-        <Pressable style={roundStyles("#d0b5e8").roundBtn}>
-            <Text style={roundStyles("#d0b5e8").btnText}>+</Text>
-          </Pressable>
+        <TouchableOpacity style={roundStyles("#d0b5e8").roundBtn} onPress={() => setShowInputForm(true)}>
+          <Text style={roundStyles("#d0b5e8").btnText}>+</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.bottom}>
-        <BottomBar roundIndex={"??"} isLearn={false} leftBtnClick={()=>console.log("test")}/>
+        <BottomBar
+          roundIndex={"??"}
+          isLearn={false}
+          leftBtnClick={() => console.log("test")}
+        />
       </View>
+      {showInputForm && (
+        <View style={styles.blurContainer}>
+          <BlurView
+            intensity={100}
+            tint="dark"
+            style={StyleSheet.absoluteFill}
+          />
+          <InputSentenseForm pressCancel={() => {setShowInputForm(false)}} pressConfirm={() => {setShowInputForm(false)}}/>
+        </View>
+      )}
     </View>
   );
 }
@@ -51,23 +72,29 @@ const styles = StyleSheet.create({
   },
   bottom: {
     width: 650,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent",
+  },
+  blurContainer: {
+    ...StyleSheet.absoluteFill,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
-const roundStyles = (backgroundColor) => StyleSheet.create({
+const roundStyles = (backgroundColor) =>
+  StyleSheet.create({
     roundBtn: {
-        width: 60,
-        height: 60,
-        borderRadius: 60,
-        backgroundColor: backgroundColor,
-        justifyContent: "center", // 수직 방향 가운데 정렬
-        alignItems: "center", // 수평 방향 가운데 정렬
-        margin: 11,
-      },
-      btnText: {
-        color: "#fff",
-        fontSize: 35,
-        fontWeight: "bold",
-      },
-})
+      width: 60,
+      height: 60,
+      borderRadius: 60,
+      backgroundColor: backgroundColor,
+      justifyContent: "center", // 수직 방향 가운데 정렬
+      alignItems: "center", // 수평 방향 가운데 정렬
+      margin: 11,
+    },
+    btnText: {
+      color: "#fff",
+      fontSize: 35,
+      fontWeight: "bold",
+    },
+  });

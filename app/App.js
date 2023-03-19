@@ -5,6 +5,7 @@ import ManageContents from "./page/ManageContents";
 import Learn from "./page/Learn";
 import { useState } from "react";
 import { roundData } from "./roundMockData";
+import * as NavigationBar from 'expo-navigation-bar';
 
 // 배열
 const mockData = roundData;
@@ -18,10 +19,13 @@ export default function App() {
     setShowLearn(true)
   };
 
+  NavigationBar.setBackgroundColorAsync("#f0ecc5");
+  NavigationBar.setButtonStyleAsync("dark");
+
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
-        <StatusBar style="auto" />
+        <StatusBar style="auto"  />
         {showLearn ? (
           <Learn index={currentRound+1} data={mockData[currentRound]} setShowLearn={()=> setShowLearn(false)}/>
         ) : (
@@ -41,5 +45,6 @@ const styles = StyleSheet.create({
   },
   safe: {
     flex: 1,
+    backgroundColor: "#363530",
   },
 });
