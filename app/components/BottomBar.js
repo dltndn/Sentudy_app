@@ -77,5 +77,6 @@ const styles = StyleSheet.create({
   bottom: {
     flexDirection: "row",
     justifyContent: "space-around",
+    backgroundColor: "transparent",
   },
 });

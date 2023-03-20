@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { BlurView } from "expo-blur";
 import MainLogo from "../components/MainLogo";
 import InputSentenseForm from "../components/inputSentenseForm";
@@ -15,7 +15,7 @@ export default function ManageContents({ dataList, onRoundPress }) {
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
 
-      <View style={styles.mainContents}>
+      <ScrollView contentContainerStyle={styles.mainContents} style={{flex: 1,}}>
         {dataList.map((item, index) => (
           <TouchableOpacity
             key={index}
@@ -28,15 +28,25 @@ export default function ManageContents({ dataList, onRoundPress }) {
         <TouchableOpacity style={roundStyles("#d0b5e8").roundBtn} onPress={() => setShowInputForm(true)}>
           <Text style={roundStyles("#d0b5e8").btnText}>+</Text>
         </TouchableOpacity>
+      </ScrollView>
+
+      <View style={styles.bottomContainer}>
+        <View style={styles.bottomBlurContainer}>
+          <BlurView
+            intensity={0}
+            tint="dark"
+            style={StyleSheet.absoluteFill}
+          />
+        </View>
+        <View style={styles.bottom}>
+          <BottomBar
+            roundIndex={"??"}
+            isLearn={false}
+            leftBtnClick={() => console.log("test")}
+          />
+        </View>
       </View>
 
-      <View style={styles.bottom}>
-        <BottomBar
-          roundIndex={"??"}
-          isLearn={false}
-          leftBtnClick={() => console.log("test")}
-        />
-      </View>
       {showInputForm && (
         <View style={styles.blurContainer}>
           <BlurView
@@ -64,15 +74,28 @@ const styles = StyleSheet.create({
   },
   mainContents: {
     paddingTop: 60,
+    paddingBottom: 60,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    alignItems: "flex-start",
     backgroundColor: "#363530",
-    height: 646,
+    width: 650,
   },
+  bottomContainer: {
+    width: 650,
+    position: "absolute",
+    bottom: 0,
+  },
+  bottomBlurContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 70,
+  },
+
   bottom: {
     width: 650,
-    backgroundColor: "transparent",
   },
   blurContainer: {
     ...StyleSheet.absoluteFill,
@@ -90,7 +113,8 @@ const roundStyles = (backgroundColor) =>
       backgroundColor: backgroundColor,
       justifyContent: "center", // 수직 방향 가운데 정렬
       alignItems: "center", // 수평 방향 가운데 정렬
-      margin: 11,
+      margin: 20,
+
     },
     btnText: {
       color: "#fff",
