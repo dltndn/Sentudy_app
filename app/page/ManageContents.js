@@ -15,7 +15,7 @@ export default function ManageContents({ dataList, onRoundPress }) {
     <View style={styles.container}>
       <MainLogo style={styles.mainLogo} />
 
-      <ScrollView contentContainerStyle={styles.mainContents} style={{flex: 1,}}>
+      <ScrollView contentContainerStyle={styles.mainContents} style={{flex: 1,}} showsVerticalScrollIndicator={false}>
         {dataList.map((item, index) => (
           <TouchableOpacity
             key={index}
