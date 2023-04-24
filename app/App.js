@@ -15,7 +15,7 @@ const mockData = roundData;
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 // to do
-// 학습 완료여부 표시 기능
+// 학습 완료여부 표시 기능 - local storage에 학습 완료 회차 번호 저장
 // 첫 화면 마지막 데이터 출력
 // 플레이스홀더 깨짐 해결
 
