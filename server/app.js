@@ -26,6 +26,21 @@ app.get(`/userAddress/:address`, (req, res) => {
 
 })
 
+app.get("/test2", (req,res) => {
+  // const sentence = `함수의 상위 스코프를 결정하는 방식으로, 함수를 어디서 선언하였는지에 따라 상위 스코프를 결정하는 것이다.`
+  const sentence = `As the elements are added the size of array changes and at the runtime, the size of the array will be determined.`
+  console.log("sen len: " + sentence.length)
+
+  const encoder = new TextEncoder();
+  const textToU8Arr = encoder.encode(sentence);     
+  console.log('sentence to byte: ' + textToU8Arr)
+  console.log('len: ' + textToU8Arr.length)
+
+  const decoder = new TextDecoder();
+  const u8arr = new Uint8Array(textToU8Arr);
+  console.log("byte to sentence: " + decoder.decode(u8arr));
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

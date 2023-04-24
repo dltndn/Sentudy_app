@@ -6,6 +6,8 @@ import Learn from "./page/Learn";
 import { useEffect, useState } from "react";
 import { roundData } from "./roundMockData";
 import * as NavigationBar from 'expo-navigation-bar';
+import * as base64 from "base-64";
+import * as utf8 from 'utf8';
 
 // 배열
 const mockData = roundData;
@@ -42,9 +44,26 @@ export default function App() {
     }
   };
 
+  const hashTest = () => {
+    const sentence = `함수의 상위 스코프를 결정하는 방식으로,
+  함수를 어디서 선언하였는지에 따라 상위 스코프를 결정하는 것이다.`
+    
+  const bytes = utf8.encode(sentence);
+  const encoded = base64.encode(bytes);
+  console.log("encoded: " + encoded);
+  console.log("len: " + encoded.length)
+
+  const bytesR = base64.decode(encoded);
+  const text = utf8.decode(bytesR);
+  console.log("text: " + text);
+  console.log("text len: " + text.length)
+
+  }
+
   useEffect(async () => {
-    const result = await getDataFromServer()
-    console.log(result)
+    // const result = await getDataFromServer()
+    hashTest()
+    // console.log(result)
   }, [])
 
   return (
