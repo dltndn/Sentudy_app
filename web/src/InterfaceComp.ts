@@ -1,4 +1,4 @@
 export interface UseUserInfoType {
     address: string | null;
-    setAddress: (data: string) => void;
+    setAddress: (data: string | null) => void;
   }

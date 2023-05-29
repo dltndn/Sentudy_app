@@ -10,7 +10,7 @@ import ContentsPage from "./pages/ContentsPage"
 
 export const useUserInfo = create<UseUserInfoType>((set) => ({
   address: null,
-  setAddress: (address: string) => set({address}),
+  setAddress: (address: string | null) => set({address}),
 }))
 
 export default function App() {

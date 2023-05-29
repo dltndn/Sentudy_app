@@ -8,6 +8,20 @@ const klipSdk = new KlipSdk();
 export default function Header() {
   const { address, setAddress } = useUserInfo();
 
+  const formatAddress = (address: string) => {
+    const pre = address.slice(0, 4);
+    const post = address.slice(-4);
+    const middle = "...";
+    return `${pre}${middle}${post}`;
+  };
+
+  const disconnectAddress = () => {
+    if(window.confirm("지갑 연결을 해제하시겠습니까?")) {
+        setAddress(null)
+    localStorage.setItem("klip_address", JSON.stringify(null));
+    }
+  }
+
   const getKlipAddress = async () => {
     try {
       const result = await klipSdk.getAddress();
@@ -20,9 +34,12 @@ export default function Header() {
 
   useEffect(() => {
     const storedAddress = localStorage.getItem("klip_address");
-    if (storedAddress) {
-      setAddress(storedAddress);
+    if (storedAddress === "null") {
+        setAddress(null)
+    } else {
+        setAddress(storedAddress)
     }
+    
   }, []);
 
   return (
@@ -30,12 +47,25 @@ export default function Header() {
       <h1>Sentudy</h1>
       {address === null ? (
         <div onClick={async () => await getKlipAddress()}>
-          <img src={klipIcon} alt="klip icon" style={{ "width": "1.5rem", "height": "1.5rem" }}/>
+          <img
+            src={klipIcon}
+            alt="klip icon"
+            style={{ width: "1.5rem", height: "1.5rem" }}
+          />
           <span>Klip지갑연결하기</span>
         </div>
       ) : (
-        <>{address}</>
+        <div onClick={() => {disconnectAddress()}}>{formatAddress(address)}</div>
       )}
+      <hr
+        style={{
+          width: "100%",
+          height: "1px",
+          border: "none",
+          borderBottom: "1px solid black",
+          margin: "0",
+        }}
+      />
     </>
   );
 }
