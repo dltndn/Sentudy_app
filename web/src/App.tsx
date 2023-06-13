@@ -7,6 +7,7 @@ import { UseUserInfoType } from "./InterfaceComp";
 
 import MainPage from "./pages/MainPage";
 import ContentsPage from "./pages/ContentsPage"
+import IpfsTest from "./components/IpfsTest";
 
 export const useUserInfo = create<UseUserInfoType>((set) => ({
   address: null,
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/contents" element={<ContentsPage />} />
           <Route path="/management" element={<></>} />
+          <Route path="/testIpfs" element={<IpfsTest />} />
         </Routes>
       </BrowserRouter>
     </>

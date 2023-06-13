@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { KlipSdk } from "../utils/KlipSdk";
 import { useUserInfo } from "../App";
+import klipIcon from "../images/klip_docs_icon.png";
 
-const klipIcon = require("../images/klip_docs_icon.png");
 const klipSdk = new KlipSdk();
 
 export default function Header() {
