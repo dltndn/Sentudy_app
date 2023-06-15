@@ -32,10 +32,17 @@ app.post("/store", async (req, res) => {
   res.send(hash)
 })
 
-app.post("/catch", async (req, res) => {
+app.post("/catchSentence", async (req, res) => {
   // hash data from client 
   const hash = req.body
-  const jsonData = await iIpfs.getData(hash.data)
+  const jsonData = await iIpfs.getSentnceData(hash.data)
+  res.json(jsonData)
+})
+
+app.post("/catchInfo", async (req, res) => {
+  // hash data from client 
+  const hash = req.body
+  const jsonData = await iIpfs.getInfoData(hash.data)
   res.json(jsonData)
 })
 

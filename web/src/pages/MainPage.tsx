@@ -17,21 +17,30 @@ export default function MainPage() {
 
     const getData = async () => {
         const sendingHashData = { data: hash }
-        const res = await axios.post('http://localhost:8001/catch', sendingHashData)
+        const res = await axios.post('http://localhost:8001/catchSentence', sendingHashData)
         console.log(res.data)
         console.log(typeof(res.data))
     }
+
+    const getData2 = async () => {
+        const sendingHashData = { data: hash }
+        const res = await axios.post('http://localhost:8001/catchInfo', sendingHashData)
+        console.log(res.data)
+        console.log(typeof(res.data))
+    }
+
     return <>
     <Header />
     메인페이지
     <button onClick={async () => await getHash()}>Get Hash</button>
     <button onClick={async () => await getData()}>Get Data</button>
+    <button onClick={async () => await getData2()}>Get Data2</button>
     <button onClick={() => navigate("/contents")}>컨텐츠 페이지 이동</button>
     </>
 }
 
 const mockData = {
-    data: [
+    sentence: [
       {
         word: "pseudonymous",
         korean: "익명을 쓰는",
@@ -67,4 +76,5 @@ const mockData = {
         sentense: "test mockData",
       },
     ],
+    information: null
   };
