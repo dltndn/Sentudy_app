@@ -1,26 +1,43 @@
-const express = require('express')
-require("dotenv").config()
-const { providers, Wallet, utils, Contract } = require('ethers');
+import express from 'express';
+import cors from 'cors'
+import bodyParser from 'body-parser';
+import InteractIpfs from './interactData/interactIpfs.js';
+// require("dotenv").config()
+// const { providers, Wallet, utils, Contract } = require('ethers');
 
-const API_KEY = process.env.ALCHEMY_API_KEY;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const CONTRACT_ADDRESS = require('./contractInformation').QUICKER_ADDRESS()
-const CONTRACT_ABI = require('./contractInformation').QUICKER_CONTRACT_ABI()
 
-// polygon mumbai
-const provider = new providers.JsonRpcProvider(process.env.ALCHEMY_URL);
-const signer = new Wallet(PRIVATE_KEY, provider)
-const quickerContract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer)
+// const API_KEY = process.env.ALCHEMY_API_KEY;
+// const PRIVATE_KEY = process.env.PRIVATE_KEY;
+// const CONTRACT_ADDRESS = require('./contractInformation').QUICKER_ADDRESS()
+// const CONTRACT_ABI = require('./contractInformation').QUICKER_CONTRACT_ABI()
 
 const app = express();
 const port = 8001;
 
-app.get("/test", async (req, res) => {
-  const result = await quickerContract.getOrder("1")
-  console.log(result)
-  res.send(result)
+app.use(express.urlencoded({extended: true}))
+app.use(bodyParser.json());
 
-});
+const iIpfs = new InteractIpfs()
+
+app.use(cors())
+
+app.get("/", (req, res) => {
+  res.send("completed")
+})
+
+app.post("/store", async (req, res) => {
+  // json data from client 
+  const jsonData = req.body;
+  const hash = await iIpfs.storeData(jsonData)
+  res.send(hash)
+})
+
+app.post("/catch", async (req, res) => {
+  // hash data from client 
+  const hash = req.body
+  const jsonData = await iIpfs.getData(hash.data)
+  res.json(jsonData)
+})
 
 app.get(`/userAddress/:address`, (req, res) => {
 
