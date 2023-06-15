@@ -3,6 +3,8 @@ import { KlipSdk } from "../utils/KlipSdk";
 import { useUserInfo } from "../App";
 import klipIcon from "../images/klip_docs_icon.png";
 
+import SideBar from "./SideBar";
+
 const klipSdk = new KlipSdk();
 
 export default function Header() {

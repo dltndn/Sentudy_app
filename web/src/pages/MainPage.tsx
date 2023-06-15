@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import Header from "../components/Header"
+import SideBar from "../components/SideBar"
 
 
 export default function MainPage() {
@@ -31,11 +32,11 @@ export default function MainPage() {
 
     return <>
     <Header />
-    메인페이지
+    공유랭킹
     <button onClick={async () => await getHash()}>Get Hash</button>
     <button onClick={async () => await getData()}>Get Data</button>
     <button onClick={async () => await getData2()}>Get Data2</button>
-    <button onClick={() => navigate("/contents")}>컨텐츠 페이지 이동</button>
+    <SideBar />
     </>
 }
 
